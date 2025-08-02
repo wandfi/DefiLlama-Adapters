@@ -19,9 +19,6 @@ const configV2 = {
         SILO_FACTORY: '0x4e9dE3a64c911A37f7EB2fCb06D1e68c3cBe9203',
       }
     ],
-    blacklistedTokens: [
-      '0x9731842ed581816913933c01de142c7ee412a8c8',// PT-Silo-46-scUSD-14AUG2025 is mispriced
-    ]
   },
   arbitrum: {
     factories: [
@@ -62,7 +59,7 @@ async function tvl(api) {
     toaV2 = assetsV2.map((asset, i) => [[asset], siloArrayV2[i]]);
   }
 
-  return sumTokens2({ api, ownerTokens: toaV2, blacklistedTokens: [XAI], blacklistedTokens, });
+  return sumTokens2({ api, ownerTokens: toaV2, blacklistedTokens: [XAI].concat(blacklistedSilos), });
 }
 
 async function borrowed(api) {
